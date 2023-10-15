@@ -24,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, ln):
         """Exit command on quit"""
         return True
-        
+
     def do_EOF(self, ln):
         """Exit command on Ctrl-D"""
         print()
@@ -40,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
             instance = eval(ln)()
             instance.save()
             print(instance.id)
-            
+
     def emptyline(self):
         """Overwrite default behavior to repeat last cmd"""
         pass
@@ -107,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name is missing **")
         else:
             print("** value is missing **")
-            
+
     def do_all(self, ln):
         """Print all objects or all objects of specified class"""
         args = parse(ln)
@@ -138,7 +138,7 @@ class HBNBCommand(cmd.Cmd):
     def default(self, ln):
         """Accepts class name followed by an argument"""
         args = ln.split('.')
-        class_arg = args[0]
+        c_arg = args[0]
         if len(args) == 1:
             print("*** Unknown syntax: {}".format(ln))
             return
@@ -146,15 +146,15 @@ class HBNBCommand(cmd.Cmd):
             args = args[1].split('(')
             command = args[0]
             if command == 'all':
-                HBNBCommand.do_all(self, class_arg)
+                HBNBCommand.do_all(self, c_arg)
             elif command == 'count':
-                HBNBCommand.do_count(self, class_arg)
+                HBNBCommand.do_count(self, c_arg)
             elif command == 'show':
                 args = args[1].split(')')
                 id_arg = args[0]
                 id_arg = id_arg.strip('"')
                 id_arg = id_arg.strip("'")
-                arg1 = class_arg + ' ' + id_arg
+                arg1 = c_arg + ' ' + id_arg
                 HBNBCommand.do_show(self, arg1)
             elif command == 'destroy':
                 args = args[1].split(')')
@@ -167,24 +167,25 @@ class HBNBCommand(cmd.Cmd):
                 args = args[1].split(',')
                 id_arg = id_arg.strip('"')
                 id_arg = args[0].strip("'")
-                name_arg = args[1].strip(',')
-                val_arg = args[2]
-                name_arg = name_arg.strip(' ')
-                name_arg = name_arg.strip('"')
-                name_arg = name_arg.strip("'")
-                val_arg = val_arg.strip(')')
-                val_arg = val_arg.strip(' ')
-                arg1 = class_arg + ' ' + id_arg + ' ' + name_arg + ' ' + val_arg
+                n_arg = args[1].strip(',')
+                v_arg = args[2]
+                n_arg = n_arg.strip(' ')
+                n_arg = n_arg.strip('"')
+                n_arg = n_arg.strip("'")
+                v_arg = v_arg.strip(')')
+                v_arg = v_arg.strip(' ')
+                arg1 = c_arg + ' ' + id_arg + ' ' + n_arg + ' ' + v_arg
                 HBNBCommand.do_update(self, arg1)
             else:
                 print("*** Unknown syntax: {}".format(ln))
         except IndexError:
             print("*** Unknown syntax: {}".format(ln))
 
+
 def parse(ln):
     """The Helper method to parse user input"""
     return tuple(ln.split())
 
+
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
-
