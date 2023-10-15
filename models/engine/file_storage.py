@@ -24,21 +24,21 @@ class FileStorage:
         '''Return dictionary of class id object instance'''
         return self.__objects
 
-    def new(self, obje):
+    def new(self, obj):
         '''Add new object to an existing dictionary of instances'''
-        if obje:
-            key = '{}.{}'.format(obje.__class__.__name__, obje.id)
-            self.__objects[key] = obje
+        if obj:
+            key = '{}.{}'.format(obj.__class__.__name__, obj.id)
+            self.__objects[key] = obj
 
     def save(self):
         '''Save obj dictionaries to json file'''
         dicn = {}
 
-        for key, obje in self.__objects.items():
+        for key, obj in self.__objects.items():
             '''if type(obje) is dict:
             dicn[key] = obje
             else:'''
-            dicn[key] = obje.to_dict()
+            dicn[key] = obj.to_dict()
         with open(self.__file_path, 'w') as f:
             json.dump(dicn, f)
 
@@ -49,6 +49,6 @@ class FileStorage:
                 obj1 = json.load(f)
             for key, val in obj1.items():
                 obj1 = self.class_dict[val['__class__']](**val)
-                self.__objects[key] = obje
+                self.__objects[key] = obj
         except FileNotFoundError:
             pass
