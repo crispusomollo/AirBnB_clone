@@ -93,7 +93,7 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as fake_output:
             self.typing.onecmd("User.count()")
             self.assertEqual(int, type(eval(fake_output.getvalue())))
-            
+
     def test_all(self):
         """Test command output all"""
         with patch('sys.stdout', new=StringIO()) as fake_output:
