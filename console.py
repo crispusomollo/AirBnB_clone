@@ -3,7 +3,7 @@
 The AirBnB command interpreter
 """
 import cmd
-from models import storage
+from models.__init__ import storage
 from models.base_model import BaseModel
 from models.amenity import Amenity
 from models.city import City
@@ -24,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, ln):
         """Exit command on quit"""
         return True
-        
+
     def do_EOF(self, ln):
         """Exit command on Ctrl-D"""
         print()
@@ -40,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
             instance = eval(ln)()
             instance.save()
             print(instance.id)
-            
+
     def emptyline(self):
         """Overwrite default behavior to repeat last cmd"""
         pass
@@ -107,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name is missing **")
         else:
             print("** value is missing **")
-            
+
     def do_all(self, ln):
         """Print all objects or all objects of specified class"""
         args = parse(ln)
@@ -181,9 +181,13 @@ class HBNBCommand(cmd.Cmd):
         except IndexError:
             print("*** Unknown syntax: {}".format(ln))
 
+
 def parse(ln):
     """The Helper method to parse user input"""
     return tuple(ln.split())
 
+
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
+
+
