@@ -2,6 +2,7 @@
 """ City class Module """
 from models.base_model import BaseModel
 
+
 class City(BaseModel):
     """
     Inherits from class BaseModel

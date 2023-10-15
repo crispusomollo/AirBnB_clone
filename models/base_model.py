@@ -9,6 +9,7 @@ import models
 Module BaseModel - Parent of all classes
 """
 
+
 class BaseModel():
     """The Base class for Airbnb clone project
     Methods:
