@@ -4,6 +4,7 @@ Review class Module
 """
 from models.base_model import BaseModel
 
+
 class Review(BaseModel):
     """
     Inherits from the BaseModel
